@@ -9,6 +9,6 @@ namespace PJS.Domain.Interfaces.Repository._Perfil
 {
     public interface IPerfilRepository : IRepositoryBase<PerfilEntity>
     {
-        
+        Task<PerfilEntity?> GetByUsuarioIdAsync(Guid usuarioId);
     }
 }
