@@ -21,10 +21,11 @@ namespace PJS.Infrastructure.Repositories._Base
             _dbSet = context.Set<TEntity>();
         }
 
-        public virtual async Task AddAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
         public virtual async Task DeleteAsync(Guid id)

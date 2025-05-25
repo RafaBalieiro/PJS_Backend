@@ -14,7 +14,7 @@ namespace PJS.Domain.Interfaces.Repository._Base
         Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
-        Task AddAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(Guid id);
         Task<IEnumerable<TEntity>> GetAllWithIncludeAsync(params Expression<Func<TEntity, object>>[] includes);

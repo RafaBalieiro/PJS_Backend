@@ -28,7 +28,7 @@ namespace PJS.WebApi.Controllers._Usuario
             try
             {
                 var usuario = await _usuarioService.Register(dto);
-                return Created("", usuario); // 201 Created
+                return Ok(usuario);
             }
             catch (InvalidOperationException ex)
             {
