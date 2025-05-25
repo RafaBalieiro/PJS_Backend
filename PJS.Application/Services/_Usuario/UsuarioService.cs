@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using PJS.Application.DTO._Usuario;
+using PJS.Application.Interfaces.Services._Auth;
 using PJS.Application.Services._Base;
 using PJS.Domain.Entities._Usuario;
 using PJS.Domain.Interfaces.Repository._Base;
@@ -16,15 +17,17 @@ namespace PJS.Application.Services._Usuario
     public class UsuarioService : ServiceBase<UsuarioEntity>, IUsuarioService
     {
         private readonly IUsuarioRepository _repository;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public UsuarioService(IUsuarioRepository repository, IMapper mapper) : base(repository)
+        public UsuarioService(IUsuarioRepository repository, ITokenService tokenService, IMapper mapper) : base(repository)
         {
             _repository = repository;
+            _tokenService = tokenService;
             _mapper = mapper;
         }
 
-        public async Task<UsuarioResponseDto> Login(string email, string senha)
+        public async Task<string> Login(string email, string senha)
         {
             var usuario = await _repository.GetByEmailAsync(email);
 
@@ -34,7 +37,9 @@ namespace PJS.Application.Services._Usuario
             if (!BCrypt.Net.BCrypt.Verify(senha, usuario.SenhaHash))
                 throw new UnauthorizedAccessException("Senha Inválida!");
 
-            return _mapper.Map<UsuarioResponseDto>(usuario);
+            var token = _tokenService.GenerateToken(usuario);
+
+            return token;
         }
 
         public async Task<UsuarioResponseDto> Register(UsuarioCadastroDto user)

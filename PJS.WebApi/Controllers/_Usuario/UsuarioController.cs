@@ -41,8 +41,8 @@ namespace PJS.WebApi.Controllers._Usuario
         {
             try
             {
-                var usuario = await _usuarioService.Login(dto.Email, dto.Senha);
-                return Ok(usuario);
+                var token = await _usuarioService.Login(dto.Email, dto.Senha);
+                return Ok(token);
             }
             catch (UnauthorizedAccessException ex)
             {

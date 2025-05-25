@@ -2,11 +2,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PJS.Domain\PJS.Domain.csproj" />
+    <ProjectReference Include="..\PJS.CrossCutting\PJS.CrossCutting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />
   </ItemGroup>
 

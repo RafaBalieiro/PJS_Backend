@@ -9,7 +9,7 @@ namespace PJS.Domain.Interfaces.Services._Usuario
 {
     public interface IUsuarioService : IServiceBase<UsuarioEntity>
     {
-        Task<UsuarioResponseDto> Login(string email, string senha);
+        Task<string> Login(string email, string senha);
         Task<UsuarioResponseDto> Register(UsuarioCadastroDto user);
     }
 }
