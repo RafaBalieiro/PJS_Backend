@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PJS.Application.DI;
+using PJS.Application.Mappings._UsuarioMap;
 using PJS.Infrastructure.Data.Context;
 using PJS.Infrastructure.DI;
 
@@ -7,14 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(UsuarioProfile).Assembly);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 var app = builder.Build();
 
@@ -46,6 +46,8 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapControllers();
 
 app.Run();
 

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using PJS.Application.Services._Base;
+using PJS.Application.Services._Usuario;
 using PJS.Domain.Interfaces.Services;
+using PJS.Domain.Interfaces.Services._Usuario;
 
 namespace PJS.Application.DI
 {
@@ -15,10 +17,7 @@ namespace PJS.Application.DI
             // Registra o serviço base genérico
             services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
 
-            // Registros de serviços específicos (exemplos)
-            //services.AddScoped<IClienteService, ClienteService>();
-            //services.AddScoped<IPedidoService, PedidoService>();
-            // Adicione os demais serviços específicos aqui
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             return services;
         }

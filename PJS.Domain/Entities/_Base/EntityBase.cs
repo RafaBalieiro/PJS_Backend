@@ -13,11 +13,9 @@ namespace PJS.Domain.Entities._Base
         public Guid Id { get; protected set; }
 
         [Required]
-        [Column(TypeName = "datetime2")]
         public DateTime DataCriacao { get; protected set; }
 
         [Required]
-        [Column(TypeName = "datetime2")]
         public DateTime DataAlteracao { get; set; }
 
         [Required]
