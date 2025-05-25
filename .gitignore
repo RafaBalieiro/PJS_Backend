@@ -1,0 +1,62 @@
+# Compiled binaries
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Build results
+*.dll
+*.exe
+*.app
+*.pdb
+*.cache
+*.csproj.user
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Visual Studio files
+.vscode/
+.vs/
+*.dbmdl
+
+# Rider files
+.idea/
+
+# ASP.NET specific
+**/wwwroot/
+**/node_modules/
+**/dist/
+
+# Logs
+*.log
+
+# Configuration
+appsettings.Development.json
+appsettings.*.local.json
+
+# EF Core Migrations generated snapshots (optional)
+**/Migrations/*Snapshot.cs
+
+# Publish
+**/publish/
+**/out/
+
+# Dotnet Tools
+.nuget/
+*.nupkg
+
+# Test Results
+TestResults/
+coverage/
+
+# JetBrains Rider
+.idea/
+
+# Ignore AutoMapper profiles if generated
+**/Mappings/AutoMapperProfile.cs
