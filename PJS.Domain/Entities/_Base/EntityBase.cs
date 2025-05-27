@@ -25,6 +25,7 @@ namespace PJS.Domain.Entities._Base
         {
             Id = Guid.NewGuid();
             DataCriacao = DateTime.UtcNow;
+            DataAlteracao = DateTime.UtcNow;
             Ativo = true;
         }
 
