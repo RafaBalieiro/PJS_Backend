@@ -20,7 +20,7 @@ namespace PJS.WebApi.Controllers._Usuario
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UsuarioCadastroDto dto)
+        public async Task<IActionResult> Register([FromBody] UsuarioCreateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

@@ -22,7 +22,7 @@ namespace PJS.WebApi.Controllers._Tarefa
         }
 
         [HttpPost]
-        public async Task<IActionResult> CriarTarefa([FromBody] TarefaCompletaCreateDto dto)
+        public async Task<IActionResult> CriarTarefa([FromBody] TarefaCreateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

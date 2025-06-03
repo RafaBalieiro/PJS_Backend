@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PJS.Domain.Interfaces.Repository._Base;
+using PJS.Domain.Interfaces.Repository._Conquista;
+using PJS.Domain.Interfaces.Repository._Nivel;
 using PJS.Domain.Interfaces.Repository._Perfil;
 using PJS.Domain.Interfaces.Repository._Tarefa;
 using PJS.Domain.Interfaces.Repository._UnitWork;
 using PJS.Domain.Interfaces.Repository._Usuario;
 using PJS.Infrastructure.Data.Context;
 using PJS.Infrastructure.Repositories._Base;
+using PJS.Infrastructure.Repositories._Conquista;
+using PJS.Infrastructure.Repositories._Nivel;
 using PJS.Infrastructure.Repositories._Perfil;
 using PJS.Infrastructure.Repositories._Tarefa;
 using PJS.Infrastructure.Repositories._UnitOfWork;
@@ -30,6 +34,8 @@ namespace PJS.Infrastructure.DI
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPerfilRepository, PerfilRepository>();
             services.AddScoped<ITarefaRepository, TarefaRepository>();
+            services.AddScoped<INivelRepository, NivelRepository>();
+            services.AddScoped<IConquistaRepository, ConquistaRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }

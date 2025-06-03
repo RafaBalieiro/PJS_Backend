@@ -8,8 +8,8 @@ using PJS.Domain.Interfaces.Services;
 
 namespace PJS.Application.Interfaces.Services._Tarefa
 {
-    public interface ITarefaService : IServiceBase<TarefaEntity>
+    public interface ITarefaService : IServiceBase<TarefaEntity, TarefaCreateDto, TarefaUpdateDto, TarefaResponseDto>
     {
-        Task<TarefaEntity> CriarTarefaCompletaAsync(TarefaCompletaCreateDto dto);
+        Task<TarefaEntity> CriarTarefaCompletaAsync(TarefaCreateDto dto);
     }
 }

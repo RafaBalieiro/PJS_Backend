@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PJS.Application.DTO._Perfil
+namespace PJS.Application.DTO._Tarefa
 {
-    public class PerfilCadastroDto
+    public class TarefaUpdateDto
     {
         
     }

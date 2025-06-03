@@ -24,7 +24,6 @@ namespace PJS.Infrastructure.Repositories._Base
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
             return entity;
         }
 
@@ -34,7 +33,6 @@ namespace PJS.Infrastructure.Repositories._Base
             if (entity != null)
             {
                 _dbSet.Remove(entity);
-                await _context.SaveChangesAsync();
             }
         }
 
@@ -78,7 +76,6 @@ namespace PJS.Infrastructure.Repositories._Base
         public virtual async Task UpdateAsync(TEntity entity)
         {
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync();
         }
     }
 }

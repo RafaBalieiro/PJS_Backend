@@ -7,7 +7,7 @@ using PJS.Domain.Enum;
 
 namespace PJS.Application.DTO._Tarefa
 {
-    public class TarefaCompletaCreateDto
+    public class TarefaCreateDto
     {
         [Required]
         public string? Nome { get; set; }

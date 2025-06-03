@@ -7,15 +7,21 @@ using PJS.Domain.Entities._Base;
 
 namespace PJS.Domain.Interfaces.Services
 {
-    public interface IServiceBase<TEntity> where TEntity : BaseEntity
+    public interface IServiceBase<TEntity, in TCreateDto, in TUpdateDto, TReadDto>
+    where TEntity : BaseEntity
     {
-        Task<TEntity> GetByIdAsync(Guid id);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
-        Task CreateAsync(TEntity entity);
-        Task UpdateAsync(TEntity entity);
+        // Retorno com DTO
+        Task<TReadDto> GetByIdAsync(Guid id);
+        Task<IEnumerable<TReadDto>> GetAllAsync();
+        Task<IEnumerable<TReadDto>> FindAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TReadDto> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+
+        // Criação / Atualização com DTOs
+        Task<TReadDto> CreateAsync(TCreateDto dto);
+        Task UpdateAsync(Guid id, TUpdateDto dto);
         Task DeleteAsync(Guid id);
+
+        // Utilitário
+        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }

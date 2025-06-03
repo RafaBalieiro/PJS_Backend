@@ -13,6 +13,8 @@ namespace PJS.Application.Mappings._UsuarioMap
         public UsuarioProfile()
         {
             CreateMap<UsuarioEntity, UsuarioResponseDto>();
+
+            CreateMap<UsuarioCreateDto, UsuarioEntity>();
         }
     }
 }

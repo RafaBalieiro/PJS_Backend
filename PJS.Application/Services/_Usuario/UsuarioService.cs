@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PJS.Application.DTO._Perfil;
 using PJS.Application.DTO._Usuario;
+using PJS.Application.DTO._Usuario._Perfil;
 using PJS.Application.Interfaces.Services._Auth;
 using PJS.Application.Interfaces.Services._Perfil;
 using PJS.Application.Services._Base;
 using PJS.Domain.Entities._Perfil;
 using PJS.Domain.Entities._Usuario;
 using PJS.Domain.Interfaces.Repository._Base;
+using PJS.Domain.Interfaces.Repository._Perfil;
 using PJS.Domain.Interfaces.Repository._UnitWork;
 using PJS.Domain.Interfaces.Repository._Usuario;
 using PJS.Domain.Interfaces.Services;
@@ -18,19 +20,21 @@ using PJS.Domain.Interfaces.Services._Usuario;
 
 namespace PJS.Application.Services._Usuario
 {
-    public class UsuarioService : ServiceBase<UsuarioEntity>, IUsuarioService
+    public class UsuarioService : ServiceBase<UsuarioEntity, UsuarioCreateDto, UsuarioUpdateDto, UsuarioResponseDto>, IUsuarioService
     {
         private readonly IUsuarioRepository _repository;
+        private readonly IPerfilRepository _perfilRepository;
         private readonly ITokenService _tokenService;
         private readonly IPerfilService _perfilService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsuarioService(IUsuarioRepository repository, ITokenService tokenService, IPerfilService perfilService, IMapper mapper, IUnitOfWork unitOfWork) : base(repository)
+        public UsuarioService(IUsuarioRepository repository, ITokenService tokenService, IPerfilService perfilService,IPerfilRepository perfilRepository, IMapper mapper, IUnitOfWork unitOfWork) : base(repository, mapper, unitOfWork)
         {
             _repository = repository;
             _tokenService = tokenService;
             _perfilService = perfilService;
+            _perfilRepository = perfilRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -50,7 +54,7 @@ namespace PJS.Application.Services._Usuario
             return token;
         }
 
-        public async Task<UsuarioResponseDto> Register(UsuarioCadastroDto user)
+        public async Task<UsuarioResponseDto> Register(UsuarioCreateDto user)
         {
             await _unitOfWork.BeginTransactionAsync();
 
@@ -69,8 +73,9 @@ namespace PJS.Application.Services._Usuario
                 if (usuarioCriado == null)
                     throw new Exception("Falha ao salvar o usuário no banco de dados.");
 
-                var perfil = new PerfilEntity(user.Nome, user.DataNascimento, usuarioCriado.Id);
-                await _perfilService.CreateAsync(perfil);
+                var perfil = new PerfilEntity(user.Nome, user.DataNascimento, usuarioCriado.Id,new Guid("aabf56f9-79f6-4e11-aeb5-c900d938c859"));
+                
+                var perfilCriado = await _perfilRepository.AddAsync(perfil);
 
                 await _unitOfWork.CommitAsync();
 

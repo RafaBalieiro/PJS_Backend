@@ -15,27 +15,27 @@ using PJS.Domain.Interfaces.Repository._UnitWork;
 
 namespace PJS.Application.Services._Tarefa
 {
-    public class TarefaService : ServiceBase<TarefaEntity>, ITarefaService
+    public class TarefaService : ServiceBase<TarefaEntity, TarefaCreateDto, TarefaUpdateDto, TarefaResponseDto>, ITarefaService
     {
         private readonly ITarefaRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public TarefaService(ITarefaRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository)
+        public TarefaService(ITarefaRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository, mapper, unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<TarefaEntity> CriarTarefaCompletaAsync(TarefaCompletaCreateDto dto)
+        public async Task<TarefaEntity> CriarTarefaCompletaAsync(TarefaCreateDto dto)
         {
             await _unitOfWork.BeginTransactionAsync();
 
             try
             {
                 var rotinaDto = dto.Rotina;
-                
+
                 var rotina = new RotinaEntity(
                     rotinaDto.DataInicial,
                     rotinaDto.DataFinal,

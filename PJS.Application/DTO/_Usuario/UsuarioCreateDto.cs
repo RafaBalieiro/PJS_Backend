@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PJS.Application.DTO._Usuario
 {
-    public class UsuarioCadastroDto
+    public class UsuarioCreateDto
     {
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "Formato de e-mail inválido.")]

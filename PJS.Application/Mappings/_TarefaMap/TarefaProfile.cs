@@ -14,7 +14,7 @@ namespace PJS.Application.Mappings._TarefaMap
     {
         public TarefaProfile()
         {
-            CreateMap<TarefaCompletaCreateDto, TarefaEntity>()
+            CreateMap<TarefaCreateDto, TarefaEntity>()
                 .ForMember(dest => dest.RotinaId, opt => opt.Ignore()) // será preenchido após salvar rotina
                 .ForMember(dest => dest.Rotina, opt => opt.Ignore())   // será setado manualmente
                 .ConstructUsing(dto => new TarefaEntity(
