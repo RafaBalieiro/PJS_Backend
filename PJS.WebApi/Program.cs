@@ -15,6 +15,18 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowApp", policy =>
+    {
+        policy
+            .SetIsOriginAllowed(_ => true) // origem do seu app Expo
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new() { Title = "PJS.API", Version = "v1" });
@@ -85,6 +97,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowApp");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
